@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Palette Studio — Beautiful Color Palettes</title>
+  <meta name="description" content="Discover, create, and export stunning color palettes for your next design project." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{{ url_for('static', path='css/style.css') }}" />
+</head>
+<body>
+
+<!-- ─── Navigation ─────────────────────────────────────────── -->
+<nav>
+  <div class="container nav-inner">
+    <a href="/" class="logo">
+      <span class="logo-dot"></span>
+      Palette Studio
+    </a>
+    <ul class="nav-links">
+      <li><a href="#palettes">Explore</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#cta">Pricing</a></li>
+      <li><a href="#cta" class="nav-cta">Get started</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ─── Hero ────────────────────────────────────────────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">
+      <span class="tag">✦ Now in Public Beta</span>
+    </div>
+    <h1>Color palettes that<br />designers actually love</h1>
+    <p>
+      Generate, curate, and export beautiful color palettes in seconds.
+      Built for designers, developers, and everyone in between.
+    </p>
+    <div class="hero-actions">
+      <a href="#palettes" class="btn btn-primary">
+        <span>Browse palettes</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </a>
+      <a href="#features" class="btn btn-ghost">See how it works</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Stats Bar ────────────────────────────────────────────── -->
+<section class="stats-bar">
+  <div class="container">
+    <div class="stats-grid">
+      {% for stat in stats %}
+      <div>
+        <div class="stat-value">{{ stat.value }}</div>
+        <div class="stat-label">{{ stat.label }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ─── Featured Palettes ────────────────────────────────────── -->
+<section class="section" id="palettes">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag" style="margin-bottom:0.75rem; display:inline-block;">Featured</span>
+      <h2>Hand-picked palettes</h2>
+      <p>Curated by our community of 12,000+ designers worldwide.</p>
+    </div>
+
+    <div class="palette-grid">
+      {% for palette in palettes %}
+      <div class="palette-card" title="Click to copy HEX values">
+        <div class="palette-swatches">
+          {% for color in palette.colors %}
+          <div class="swatch" style="background-color: {{ color }};"></div>
+          {% endfor %}
+        </div>
+        <div class="palette-meta">
+          <span class="palette-name">{{ palette.name }}</span>
+          <div class="palette-tags">
+            {% for t in palette.tags %}
+            <span class="tag">{{ t }}</span>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<!-- ─── Features ─────────────────────────────────────────────── -->
+<section class="features" id="features">
+  <div class="container">
+    <div class="section-header">
+      <span class="tag" style="margin-bottom:0.75rem; display:inline-block;">Why Palette Studio</span>
+      <h2>Everything you need to ship great color</h2>
+    </div>
+    <div class="features-grid">
+
+      <div class="feature-card">
+        <div class="feature-icon">🎨</div>
+        <h3>AI-Powered Generation</h3>
+        <p>Describe a mood or scene and our model builds a harmonious palette instantly.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>One-Click Export</h3>
+        <p>Export to CSS variables, Tailwind config, Figma tokens, or raw HEX — your choice.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🌗</div>
+        <h3>Contrast Checker</h3>
+        <p>WCAG AA & AAA scores on every swatch combination, automatically.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <h3>Collections</h3>
+        <p>Save and organise your favourites into labelled collections for each project.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>Shareable Links</h3>
+        <p>Every palette gets a permanent link you can drop into Slack, Notion, or anywhere.</p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">🛠️</div>
+        <h3>Developer API</h3>
+        <p>Fetch palettes programmatically via our REST API — perfect for design systems.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── CTA ───────────────────────────────────────────────────── -->
+<section class="cta-banner" id="cta">
+  <div class="container">
+    <div class="cta-box">
+      <span class="tag" style="margin-bottom:1rem; display:inline-block;">Free forever</span>
+      <h2>Start creating for free</h2>
+      <p>No credit card required. Access 200+ curated palettes on day one.</p>
+      <form class="email-form" onsubmit="handleSignup(event)">
+        <input type="email" placeholder="you@example.com" required aria-label="Email address" />
+        <button type="submit" class="btn btn-primary">Get early access</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ─── Footer ───────────────────────────────────────────────── -->
+<footer>
+  <div class="container footer-inner">
+    <a href="/" class="logo" style="font-size:0.9rem;">
+      <span class="logo-dot"></span>
+      Palette Studio
+    </a>
+    <ul class="footer-links">
+      <li><a href="#">Privacy</a></li>
+      <li><a href="#">Terms</a></li>
+      <li><a href="#">API Docs</a></li>
+      <li><a href="#">Status</a></li>
+    </ul>
+    <p class="footer-copy">© 2026 Palette Studio. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ─── Minimal JS ─────────────────────────────────────────── -->
+<script>
+  /* Copy HEX values on palette card click */
+  document.querySelectorAll('.palette-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const swatches = card.querySelectorAll('.swatch');
+      const colors = Array.from(swatches).map(s =>
+        getComputedStyle(s).backgroundColor
+      );
+      /* Build a readable string from inline style attributes instead */
+      const hexList = Array.from(swatches)
+        .map(s => s.style.backgroundColor)
+        .join(', ');
+      navigator.clipboard?.writeText(hexList).then(() => {
+        const name = card.querySelector('.palette-name');
+        const original = name.textContent;
+        name.textContent = '✓ Copied!';
+        setTimeout(() => name.textContent = original, 1600);
+      });
+    });
+  });
+
+  /* Sign-up form feedback */
+  function handleSignup(e) {
+    e.preventDefault();
+    const btn = e.target.querySelector('button');
+    btn.textContent = '🎉 You\'re on the list!';
+    btn.disabled = true;
+    btn.style.background = '#2a9d5c';
+    e.target.querySelector('input').disabled = true;
+  }
+</script>
+
+</body>
+</html>
+
